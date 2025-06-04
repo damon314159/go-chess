@@ -32,23 +32,23 @@ func (p Pawn) Moves(from domain.Square) []domain.Move {
 	moves := make([]domain.Move, 0, 4)
 
 	if advanced1, err := advance(1); err == nil {
-		moves = append(moves, board.NewMove(from, advanced1, []domain.Square{advanced1}, nil))
+		moves = append(moves, board.NewMove(from, advanced1, []domain.Square{advanced1}, false))
 
 		if isHome {
 			if advanced2, err := advance(2); err == nil {
 				moves = append(
 					moves,
-					board.NewMove(from, advanced2, []domain.Square{advanced1, advanced2}, nil),
+					board.NewMove(from, advanced2, []domain.Square{advanced1, advanced2}, false),
 				)
 			}
 		}
 
 		if diagLeft, err := advanced1.Left(1); err == nil {
-			moves = append(moves, board.NewMove(from, diagLeft, nil, []domain.Square{diagLeft}))
+			moves = append(moves, board.NewMove(from, diagLeft, nil, true))
 		}
 
 		if diagRight, err := advanced1.Right(1); err == nil {
-			moves = append(moves, board.NewMove(from, diagRight, nil, []domain.Square{diagRight}))
+			moves = append(moves, board.NewMove(from, diagRight, nil, true))
 		}
 	}
 

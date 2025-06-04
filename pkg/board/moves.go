@@ -8,8 +8,8 @@ type Move struct {
 	to   domain.Square
 	from domain.Square
 
-	nothingBlocking   []domain.Square
-	somethingBlocking []domain.Square
+	nothingBlocking []domain.Square
+	captureRequired bool
 }
 
 var _ domain.Move = (*Move)(nil)
@@ -18,9 +18,9 @@ func NewMove(
 	to domain.Square,
 	from domain.Square,
 	nothingBlocking []domain.Square,
-	somethingBlocking []domain.Square,
+	captureRequired bool,
 ) domain.Move {
-	return Move{to, from, nothingBlocking, somethingBlocking}
+	return Move{to, from, nothingBlocking, captureRequired}
 }
 
 func (m Move) To() domain.Square {
@@ -39,10 +39,6 @@ func (m Move) NothingBlocking() []domain.Square {
 	return m.nothingBlocking
 }
 
-func (m Move) SomethingBlocking() []domain.Square {
-	// Ensure nil slices are never returned
-	if m.somethingBlocking == nil {
-		return []domain.Square{}
-	}
-	return m.somethingBlocking
+func (m Move) CaptureRequired() bool {
+	return m.captureRequired
 }

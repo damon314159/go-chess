@@ -9,6 +9,6 @@ type Move interface {
 
 	// There must be nothing in these squares for the move to be valid
 	NothingBlocking() []Square
-	// There must be something in these squares for the move to be valid
-	SomethingBlocking() []Square
+	// Whether a capture must be made for this move to be valid
+	CaptureRequired() bool
 }

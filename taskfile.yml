@@ -31,6 +31,7 @@ tasks:
   fmt:
     desc: Format code
     cmds:
+      - golines -w .
       - go fmt ./...
 
   clean:

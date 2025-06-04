@@ -13,11 +13,18 @@ type Square struct {
 
 var _ domain.Square = (*Square)(nil)
 
+const (
+	minFile = 1
+	maxFile = 8
+	minRank = 1
+	maxRank = 8
+)
+
 func NewSquare(file domain.File, rank domain.Rank) (Square, error) {
-	if file < 1 || file > 8 {
+	if file < minFile || file > maxFile {
 		return Square{}, fmt.Errorf("Square constructed with File out of bounds (%d)", file)
 	}
-	if rank < 1 || rank > 8 {
+	if rank < minRank || rank > maxRank {
 		return Square{}, fmt.Errorf("Square constructed with Rank out of bounds (%d)", rank)
 	}
 

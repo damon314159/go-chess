@@ -1,6 +1,10 @@
 package board
 
-import "github.com/damon314159/go-chess/pkg/domain"
+import (
+	"fmt"
+
+	"github.com/damon314159/go-chess/pkg/domain"
+)
 
 type Square struct {
 	file domain.File
@@ -9,12 +13,39 @@ type Square struct {
 
 var _ domain.Square = (*Square)(nil)
 
+func NewSquare(file domain.File, rank domain.Rank) (Square, error) {
+	if file < 1 || file > 8 {
+		return Square{}, fmt.Errorf("Square constructed with File out of bounds (%d)", file)
+	}
+	if rank < 1 || rank > 8 {
+		return Square{}, fmt.Errorf("Square constructed with Rank out of bounds (%d)", rank)
+	}
+
+	return Square{file, rank}, nil
+}
+
 func (s Square) File() domain.File {
 	return s.file
 }
 
 func (s Square) Rank() domain.Rank {
 	return s.rank
+}
+
+func (s Square) Up(spaces uint8) (domain.Square, error) {
+	return NewSquare(s.file, s.rank+domain.Rank(spaces))
+}
+
+func (s Square) Down(spaces uint8) (domain.Square, error) {
+	return NewSquare(s.file, s.rank-domain.Rank(spaces))
+}
+
+func (s Square) Left(spaces uint8) (domain.Square, error) {
+	return NewSquare(s.file-domain.File(spaces), s.rank)
+}
+
+func (s Square) Right(spaces uint8) (domain.Square, error) {
+	return NewSquare(s.file+domain.File(spaces), s.rank)
 }
 
 // Unexported Files used to construct all Squares below

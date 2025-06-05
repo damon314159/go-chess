@@ -47,7 +47,18 @@ func TestPawn_Moves(t *testing.T) {
 		}
 	})
 
-	t.Run("returns forwards one square when white and not on home rank", func(t *testing.T) {
+	t.Run("cannot move to current square or backwards", func(t *testing.T) {
+		pawn := pieces.NewPawn(domain.Black)
+		square, _ := board.NewSquare(domain.File(4), board.BlackHomeRank-1)
+
+		moves := pawn.Moves(square)
+
+		backwards, _ := square.Up(1)
+		assertCannotMoveTo(t, moves, square)
+		assertCannotMoveTo(t, moves, backwards)
+	})
+
+	t.Run("moves forwards one square when white and not on home rank", func(t *testing.T) {
 		pawn := pieces.NewPawn(domain.White)
 		square, _ := board.NewSquare(domain.File(4), board.WhiteHomeRank+1)
 
@@ -59,7 +70,7 @@ func TestPawn_Moves(t *testing.T) {
 		assertCannotMoveTo(t, moves, up2)
 	})
 
-	t.Run("returns forwards one or two squares when white on home rank", func(t *testing.T) {
+	t.Run("moves forwards one or two squares when white on home rank", func(t *testing.T) {
 		pawn := pieces.NewPawn(domain.White)
 		square, _ := board.NewSquare(domain.File(4), board.WhiteHomeRank)
 
@@ -71,7 +82,7 @@ func TestPawn_Moves(t *testing.T) {
 		assertCanMoveTo(t, moves, up2)
 	})
 
-	t.Run("returns forwards one square when black and not on home rank", func(t *testing.T) {
+	t.Run("moves forwards one square when black and not on home rank", func(t *testing.T) {
 		pawn := pieces.NewPawn(domain.Black)
 		square, _ := board.NewSquare(domain.File(4), board.BlackHomeRank-1)
 
@@ -83,7 +94,7 @@ func TestPawn_Moves(t *testing.T) {
 		assertCannotMoveTo(t, moves, down2)
 	})
 
-	t.Run("returns forwards one or two squares when black on home rank", func(t *testing.T) {
+	t.Run("moves forwards one or two squares when black on home rank", func(t *testing.T) {
 		pawn := pieces.NewPawn(domain.Black)
 		square, _ := board.NewSquare(domain.File(4), board.BlackHomeRank)
 
@@ -102,17 +113,6 @@ func TestPawn_Moves(t *testing.T) {
 		moves := pawn.Moves(square)
 
 		assertMoveCount(t, moves, 0)
-	})
-
-	t.Run("cannot move to current square or backwards", func(t *testing.T) {
-		pawn := pieces.NewPawn(domain.Black)
-		square, _ := board.NewSquare(domain.File(4), board.BlackHomeRank-1)
-
-		moves := pawn.Moves(square)
-
-		backwards, _ := square.Up(1)
-		assertCannotMoveTo(t, moves, square)
-		assertCannotMoveTo(t, moves, backwards)
 	})
 
 	t.Run("can move diagonally but must capture", func(t *testing.T) {

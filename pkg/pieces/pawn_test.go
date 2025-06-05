@@ -181,5 +181,9 @@ func assertMustCapture(t *testing.T, moves []domain.Move, to domain.Square) {
 		}
 	}
 
-	t.Errorf("expected must capture move to %s, got must capture moves to %s", to, allMustCaptureSquares)
+	t.Errorf(
+		"expected must capture move to %s, got must capture moves to %s",
+		to,
+		allMustCaptureSquares,
+	)
 }

@@ -40,6 +40,30 @@ func TestNewSquare(t *testing.T) {
 	})
 }
 
+func TestSquare_Translate(t *testing.T) {
+	t.Run("returns a new square with new file and rank", func(t *testing.T) {
+		from, _ := board.NewSquare(domain.File(2), domain.Rank(2))
+		to, err := from.Translate(1, 1)
+
+		assertNoErr(t, err)
+		assertFileAndRank(t, to, domain.File(3), domain.Rank(3))
+	})
+
+	t.Run("returns an error if the file is out of bounds", func(t *testing.T) {
+		from, _ := board.NewSquare(domain.File(2), domain.Rank(2))
+		_, err := from.Translate(10, 1)
+
+		assertErr(t, err)
+	})
+
+	t.Run("returns an error if the rank is out of bounds", func(t *testing.T) {
+		from, _ := board.NewSquare(domain.File(2), domain.Rank(2))
+		_, err := from.Translate(1, 10)
+
+		assertErr(t, err)
+	})
+}
+
 func assertNoErr(t *testing.T, err error) {
 	t.Helper()
 
@@ -56,7 +80,7 @@ func assertErr(t *testing.T, err error) {
 	}
 }
 
-func assertFileAndRank(t *testing.T, square board.Square, file domain.File, rank domain.Rank) {
+func assertFileAndRank(t *testing.T, square domain.Square, file domain.File, rank domain.Rank) {
 	t.Helper()
 
 	if square.File() != file {

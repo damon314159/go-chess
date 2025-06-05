@@ -12,6 +12,9 @@ type Square interface {
 	File() File
 	// Getter for this Square's Rank
 	Rank() Rank
+
+	// Constructor for a Square translated arbitrarily from this one
+	Translate(uint8, uint8) (Square, error)
 	// Constructor for a Square translated up from this one
 	Up(uint8) (Square, error)
 	// Constructor for a Square translated down from this one

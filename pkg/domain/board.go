@@ -13,7 +13,7 @@ type Square interface {
 	// Getter for this Square's Rank
 	Rank() Rank
 
-	// Constructor for a Square translated arbitrarily from this one
+	// Constructor for a Square translated arbitrarily from this one by (right, up)
 	Translate(int8, int8) (Square, error)
 	// Constructor for a Square translated up from this one
 	Up(int8) (Square, error)

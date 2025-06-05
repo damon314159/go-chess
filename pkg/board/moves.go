@@ -37,7 +37,10 @@ func (m Move) NothingBlocking() []domain.Square {
 	if m.nothingBlocking == nil {
 		return []domain.Square{}
 	}
-	return m.nothingBlocking
+	// Create a new slice to avoid returning the original slice
+	result := make([]domain.Square, len(m.nothingBlocking))
+	copy(result, m.nothingBlocking)
+	return result
 }
 
 func (m Move) CaptureRequired() bool {

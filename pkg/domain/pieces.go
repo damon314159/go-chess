@@ -4,11 +4,23 @@ package domain
 type Value uint8
 
 // The colour of the piece, either white or black
-type Colour string
+// You should not use this type directly, but instead use the White or Black constants
+type Colour struct {
+	colour int8
+}
 
-const (
-	White Colour = "White"
-	Black Colour = "Black"
+// Implements fmt.Stringer to provide a nice display of the colour
+func (c Colour) String() string {
+	if c.colour == 1 {
+		return "white"
+	}
+	return "black"
+}
+
+// One of the two possible colours of a piece
+var (
+	White Colour = Colour{1}
+	Black Colour = Colour{0}
 )
 
 // Represents any piece on the board

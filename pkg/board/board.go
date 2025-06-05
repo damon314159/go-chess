@@ -10,6 +10,11 @@ const (
 )
 
 const (
+	MaxDiagDistance     int8 = 7
+	MaxStraightDistance int8 = 7
+)
+
+const (
 	WhiteHomeRank domain.Rank = 2
 	BlackHomeRank domain.Rank = 7
 )

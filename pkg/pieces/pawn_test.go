@@ -23,20 +23,14 @@ func TestPawn_Value(t *testing.T) {
 func TestPawn_Colour(t *testing.T) {
 	t.Run("returns the correct colour when white", func(t *testing.T) {
 		pawn := pieces.NewPawn(domain.White)
-		colour := pawn.Colour()
 
-		if colour != domain.White {
-			t.Errorf("expected colour to be %s, got %s", domain.White, colour)
-		}
+		assertWhite(t, pawn)
 	})
 
 	t.Run("returns the correct colour when black", func(t *testing.T) {
 		pawn := pieces.NewPawn(domain.Black)
-		colour := pawn.Colour()
 
-		if colour != domain.Black {
-			t.Errorf("expected colour to be %s, got %s", domain.Black, colour)
-		}
+		assertBlack(t, pawn)
 	})
 }
 
@@ -107,9 +101,7 @@ func TestPawn_Moves(t *testing.T) {
 
 		moves := pawn.Moves(square)
 
-		if len(moves) != 0 {
-			t.Errorf("expected no moves, got %d", len(moves))
-		}
+		assertMoveCount(t, moves, 0)
 	})
 
 	t.Run("cannot move to current square or backwards", func(t *testing.T) {
@@ -136,54 +128,4 @@ func TestPawn_Moves(t *testing.T) {
 		assertCanMoveTo(t, moves, diagRight)
 		assertMustCapture(t, moves, diagRight)
 	})
-}
-
-func assertCanMoveTo(t *testing.T, moves []domain.Move, to domain.Square) {
-	t.Helper()
-
-	for _, move := range moves {
-		if move.To() == to {
-			return
-		}
-	}
-
-	allToSquares := []domain.Square{}
-	for _, move := range moves {
-		allToSquares = append(allToSquares, move.To())
-	}
-
-	t.Errorf("expected move to %s, got %s", to, allToSquares)
-}
-
-func assertCannotMoveTo(t *testing.T, moves []domain.Move, to domain.Square) {
-	t.Helper()
-
-	for _, move := range moves {
-		if move.To() == to {
-			t.Errorf("expected move to not be able to move to %s", to)
-		}
-	}
-}
-
-func assertMustCapture(t *testing.T, moves []domain.Move, to domain.Square) {
-	t.Helper()
-
-	for _, move := range moves {
-		if move.To() == to && move.CaptureRequired() {
-			return
-		}
-	}
-
-	allMustCaptureSquares := []domain.Square{}
-	for _, move := range moves {
-		if move.CaptureRequired() {
-			allMustCaptureSquares = append(allMustCaptureSquares, move.To())
-		}
-	}
-
-	t.Errorf(
-		"expected must capture move to %s, got must capture moves to %s",
-		to,
-		allMustCaptureSquares,
-	)
 }

@@ -32,23 +32,23 @@ func (s Square) Rank() domain.Rank {
 	return s.rank
 }
 
-func (s Square) Translate(right uint8, up uint8) (domain.Square, error) {
+func (s Square) Translate(right int8, up int8) (domain.Square, error) {
 	return NewSquare(s.file+domain.File(right), s.rank+domain.Rank(up))
 }
 
-func (s Square) Up(spaces uint8) (domain.Square, error) {
+func (s Square) Up(spaces int8) (domain.Square, error) {
 	return s.Translate(0, spaces)
 }
 
-func (s Square) Down(spaces uint8) (domain.Square, error) {
+func (s Square) Down(spaces int8) (domain.Square, error) {
 	return s.Translate(0, -spaces)
 }
 
-func (s Square) Left(spaces uint8) (domain.Square, error) {
+func (s Square) Left(spaces int8) (domain.Square, error) {
 	return s.Translate(-spaces, 0)
 }
 
-func (s Square) Right(spaces uint8) (domain.Square, error) {
+func (s Square) Right(spaces int8) (domain.Square, error) {
 	return s.Translate(spaces, 0)
 }
 

@@ -1,10 +1,10 @@
 package domain
 
 // The vertical files on the board, labelled A-H
-type File uint8
+type File int8
 
 // The horizontal ranks on the board, labelled 1-8
-type Rank uint8
+type Rank int8
 
 // Represents a single one of the 64 Squares on the board
 type Square interface {
@@ -14,15 +14,15 @@ type Square interface {
 	Rank() Rank
 
 	// Constructor for a Square translated arbitrarily from this one
-	Translate(uint8, uint8) (Square, error)
+	Translate(int8, int8) (Square, error)
 	// Constructor for a Square translated up from this one
-	Up(uint8) (Square, error)
+	Up(int8) (Square, error)
 	// Constructor for a Square translated down from this one
-	Down(uint8) (Square, error)
+	Down(int8) (Square, error)
 	// Constructor for a Square translated left from this one
-	Left(uint8) (Square, error)
+	Left(int8) (Square, error)
 	// Constructor for a Square translated right from this one
-	Right(uint8) (Square, error)
+	Right(int8) (Square, error)
 
 	// Implements fmt.Stringer to provide a nice display of it's coordinates
 	String() string

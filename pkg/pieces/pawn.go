@@ -18,7 +18,7 @@ func NewPawn(colour domain.Colour) Pawn {
 const PawnValue = 1
 
 func (p Pawn) Moves(from domain.Square) []domain.Move {
-	var advance func(spaces uint8) (domain.Square, error)
+	var advance func(spaces int8) (domain.Square, error)
 	var isHome bool
 
 	switch p.colour {

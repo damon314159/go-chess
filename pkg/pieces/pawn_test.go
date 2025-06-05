@@ -132,7 +132,9 @@ func TestPawn_Moves(t *testing.T) {
 		diagLeft, _ := square.Translate(-1, 1)
 		diagRight, _ := square.Translate(1, 1)
 		assertCanMoveTo(t, moves, diagLeft)
+		assertMustCapture(t, moves, diagLeft)
 		assertCanMoveTo(t, moves, diagRight)
+		assertMustCapture(t, moves, diagRight)
 	})
 }
 

@@ -11,6 +11,10 @@ type Pawn struct {
 
 var _ domain.Piece = (*Pawn)(nil)
 
+func NewPawn(colour domain.Colour) Pawn {
+	return Pawn{colour}
+}
+
 const PawnValue = 1
 
 func (p Pawn) Moves(from domain.Square) []domain.Move {

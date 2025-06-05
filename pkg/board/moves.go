@@ -37,7 +37,7 @@ func (m Move) NothingBlocking() []domain.Square {
 	if m.nothingBlocking == nil {
 		return []domain.Square{}
 	}
-	// Create a new slice to avoid returning the original slice
+	// Create a new copy to avoid returning the original slice
 	result := make([]domain.Square, len(m.nothingBlocking))
 	copy(result, m.nothingBlocking)
 	return result

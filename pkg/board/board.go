@@ -1,13 +1,15 @@
 package board
 
+import "github.com/damon314159/go-chess/pkg/domain"
+
 const (
-	MinFile = 1
-	MaxFile = 8
-	MinRank = 1
-	MaxRank = 8
+	MinFile domain.File = 1
+	MaxFile domain.File = 8
+	MinRank domain.Rank = 1
+	MaxRank domain.Rank = 8
 )
 
 const (
-	WhiteHomeRank = 2
-	BlackHomeRank = 7
+	WhiteHomeRank domain.Rank = 2
+	BlackHomeRank domain.Rank = 7
 )

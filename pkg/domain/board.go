@@ -23,6 +23,9 @@ type Square interface {
 	Left(uint8) (Square, error)
 	// Constructor for a Square translated right from this one
 	Right(uint8) (Square, error)
+
+	// Implements fmt.Stringer to provide a nice display of it's coordinates
+	String() string
 }
 
 // Represents the board on which the game is played

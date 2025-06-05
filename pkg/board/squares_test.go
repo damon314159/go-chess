@@ -64,6 +64,18 @@ func TestSquare_Translate(t *testing.T) {
 	})
 }
 
+func TestSquare_String(t *testing.T) {
+	t.Run("returns a string representation of the square", func(t *testing.T) {
+		s, _ := board.NewSquare(domain.File(3), domain.Rank(6))
+
+		str := s.String()
+
+		if str != "c6" {
+			t.Errorf("expected string to be 'c6', got '%s'", str)
+		}
+	})
+}
+
 func assertNoErr(t *testing.T, err error) {
 	t.Helper()
 

@@ -52,6 +52,11 @@ func (s Square) Right(spaces uint8) (domain.Square, error) {
 	return s.Translate(spaces, 0)
 }
 
+func (s Square) String() string {
+	files := []string{"a", "b", "c", "d", "e", "f", "g", "h"}
+	return fmt.Sprintf("%s%d", files[s.file-1], s.rank)
+}
+
 // Unexported Files used to construct all Squares below
 const (
 	fA domain.File = iota + 1

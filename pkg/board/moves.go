@@ -5,30 +5,31 @@ import (
 )
 
 type Move struct {
-	to   domain.Square
-	from domain.Square
-
+	from            domain.Square
+	to              domain.Square
 	nothingBlocking []domain.Square
 	captureRequired bool
 }
 
 var _ domain.Move = (*Move)(nil)
 
-func NewMove(
-	to domain.Square,
-	from domain.Square,
-	nothingBlocking []domain.Square,
-	captureRequired bool,
-) domain.Move {
-	return Move{to, from, nothingBlocking, captureRequired}
+func NewMove(cfg MoveConfig) domain.Move {
+	return Move{cfg.From, cfg.To, cfg.NothingBlocking, cfg.CaptureRequired}
 }
 
-func (m Move) To() domain.Square {
-	return m.to
+type MoveConfig struct {
+	From            domain.Square
+	To              domain.Square
+	NothingBlocking []domain.Square
+	CaptureRequired bool
 }
 
 func (m Move) From() domain.Square {
 	return m.from
+}
+
+func (m Move) To() domain.Square {
+	return m.to
 }
 
 func (m Move) NothingBlocking() []domain.Square {

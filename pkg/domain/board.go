@@ -30,9 +30,10 @@ type Board interface {
 	// Take in a move and determine whether it is valid, based on the rest of the Board state
 	ValidateMove(Move) bool
 	// Perform a move on the Board that has been pre-validated
-	MovePiece(Move)
+	MovePiece(Move) error
 	// Take a piece off the Board
-	RemovePiece(Square)
+	RemovePiece(Square) error
 	// Determine whether any checks (threats) are made against the king of the Colour
+	// TODO: determine a return type for this
 	Checks(Colour)
 }

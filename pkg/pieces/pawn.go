@@ -11,10 +11,7 @@ type Pawn struct {
 
 var _ domain.Piece = (*Pawn)(nil)
 
-const (
-	whiteHomeRank = 2
-	blackHomeRank = 7
-)
+const PawnValue = 1
 
 func (p Pawn) Moves(from domain.Square) []domain.Move {
 	var advance func(spaces uint8) (domain.Square, error)
@@ -23,10 +20,10 @@ func (p Pawn) Moves(from domain.Square) []domain.Move {
 	switch p.colour {
 	case domain.White:
 		advance = from.Up
-		isHome = from.Rank() == whiteHomeRank
+		isHome = from.Rank() == board.WhiteHomeRank
 	case domain.Black:
 		advance = from.Down
-		isHome = from.Rank() == blackHomeRank
+		isHome = from.Rank() == board.BlackHomeRank
 	}
 
 	moves := make([]domain.Move, 0, 4)
@@ -78,7 +75,7 @@ func (p Pawn) Moves(from domain.Square) []domain.Move {
 }
 
 func (Pawn) Value() domain.Value {
-	return 1
+	return PawnValue
 }
 
 func (p Pawn) Colour() domain.Colour {

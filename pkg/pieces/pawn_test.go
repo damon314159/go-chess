@@ -128,4 +128,17 @@ func TestPawn_Moves(t *testing.T) {
 		assertCanMoveTo(t, moves, diagRight)
 		assertMustCapture(t, moves, diagRight)
 	})
+
+	t.Run("cannot move diagonally off the board", func(t *testing.T) {
+		pawn := pieces.NewPawn(domain.White)
+		square, _ := board.NewSquare(domain.File(1), board.WhiteHomeRank+1)
+
+		moves := pawn.Moves(square)
+
+		up1, _ := square.Up(1)
+		diagRight, _ := up1.Right(1)
+		assertMoveCount(t, moves, 2) // Only forwards and the other diagonal
+		assertCanMoveTo(t, moves, diagRight)
+		assertCanMoveTo(t, moves, up1)
+	})
 }

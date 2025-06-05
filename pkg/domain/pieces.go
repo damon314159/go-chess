@@ -1,7 +1,7 @@
 package domain
 
 // The numeric relative value of the piece (https://en.wikipedia.org/wiki/Chess_piece_relative_value)
-type Value uint8
+type Value int8
 
 // The colour of the piece, either white or black
 // You should not use this type directly, but instead use the White or Black constants
